@@ -1,4 +1,9 @@
 export { default as Loading } from "./Loading";
 export { default as Header } from "./Header";
-export { default as Footer } from "./Footer";
 export { default as Sidebar } from "./Sidebar";
+export { default as Button } from "./Button";
+export { default as CardProduct } from "./CardProduct";
+export { default as Field } from "./Field";
+export { default as Label } from "./Label";
+export { default as Input } from "./Input";
+export { default as Select } from "./Select";

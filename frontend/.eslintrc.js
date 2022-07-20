@@ -19,6 +19,7 @@ module.exports = {
     "react/require-extension": 0,
     "react/jsx-first-prop-new-line": [2, "multiline"],
     "react/jsx-no-target-blank": 0,
+    "no-underscore-dangle": "off",
     "react/jsx-uses-vars": 2,
     "react/jsx-one-expression-per-line": 0,
     "react/jsx-filename-extension": 0,

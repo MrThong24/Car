@@ -1,0 +1,23 @@
+.btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Inter";
+  &--success-outline {
+    background-color: #6ecb63;
+    color: #ffffff;
+  }
+  &--error-outline {
+    background-color: #ff4d4d;
+    color: #ffffff;
+  }
+  &--close-addProduct {
+    background-color: #ffffff;
+  }
+  &--add-addProduct {
+    background-color: var(--colorButtonPrimary);
+  }
+  &--btn-addProduct {
+    padding: 10px 20px;
+  }
+}

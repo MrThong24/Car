@@ -1,13 +1,9 @@
-import { Home, Product } from "../pages";
+import { ManagerProduct } from "../pages";
 
 export default [
   {
-    path: ["/home", "/"],
+    path: ["/managerProduct"],
     exact: true,
-    component: Home,
-  },
-  {
-    path: "/product",
-    component: Product,
+    component: ManagerProduct,
   },
 ];

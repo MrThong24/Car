@@ -1,3 +1,5 @@
+/* eslint-disable object-curly-newline */
+/* eslint-disable no-unused-vars */
 import React, { useEffect, useMemo, useState } from "react";
 import { Grid, Pagination } from "@mui/material";
 import "./ManagerProduct.scss";
@@ -5,7 +7,8 @@ import { useHistory, useLocation } from "react-router-dom";
 import queryString from "query-string";
 import apiProduct from "../../api/apiProduct";
 import useLoading from "../../hooks/useLoading";
-import { CardProduct } from "../../components";
+import { CardProduct, Modal, ModalContent } from "../../components";
+import AddProduct from "./components/AddProduct";
 import { number } from "../../const";
 
 const ManagerProduct = () => {
@@ -16,6 +19,9 @@ const ManagerProduct = () => {
   const [showLoader, hideLoader] = useLoading();
   const [loading, setLoading] = useState(false);
   const [value, setValue] = useState("");
+  const [open, setOpen] = useState(false);
+  const [openContentModal, setOpenContentModal] = useState(false);
+
   const queryParams = useMemo(() => {
     const params = queryString.parse(location.search);
     return {
@@ -27,7 +33,7 @@ const ManagerProduct = () => {
 
   const fetchData = async () => {
     const { products, count } = await apiProduct.getAllProduct(queryParams);
-    setTotalPage(Math.ceil(count / queryParams.limit));
+    setTotalPage(Math.ceil(count / queryParams.limit)); // return number max
     setProduct(products);
   };
 
@@ -36,7 +42,7 @@ const ManagerProduct = () => {
     fetchData();
     setLoading(true);
     hideLoader();
-  }, [queryParams]);
+  }, [queryParams, openContentModal]);
 
   const handleChangeSearch = (e) => {
     if (e.target.value === "") {
@@ -66,13 +72,52 @@ const ManagerProduct = () => {
     });
   };
 
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+    setOpenContentModal(false);
+  };
+
+  const handleOnSubmit = async (values, image) => {
+    const { name, category, categoryType, price, description } = values;
+    const formData = new FormData();
+    formData.append("name", name);
+    formData.append("category", category);
+    formData.append("categoryType", categoryType);
+    formData.append("price", price);
+    formData.append("description", description);
+    formData.append("image", image, image.name);
+    try {
+      const dataProductAdd = await apiProduct.addProduct(formData); //
+      setOpenContentModal(true);
+      setOpen(false);
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <div className="content">
       <div className="content-header">
-        <button type="button" className="content-header__btn">
+        <button
+          type="button"
+          className="content-header__btn"
+          onClick={handleClickOpen}
+        >
           Thêm sản phẩm
         </button>
-
+        <Modal open={open} onClose={handleClose}>
+          <AddProduct onClickClose={handleClose} onSubmit={handleOnSubmit} />
+        </Modal>
+        <Modal open={openContentModal} onClose={handleClose}>
+          <ModalContent
+            onClickClose={handleClose}
+            title="Thêm thành công "
+            image="./success.png"
+          />
+        </Modal>
         <div className="content-header__search">
           <i className="bx bx-search" />
           <input
@@ -84,12 +129,7 @@ const ManagerProduct = () => {
         </div>
       </div>
       <div className="content-body">
-        <Grid
-          className="content-body__list"
-          container
-          // eslint-disable-next-line object-curly-newline
-          direction="row"
-        >
+        <Grid className="content-body__list" container direction="row">
           {product.length > 0 ? (
             <>
               {product?.map((item) => (

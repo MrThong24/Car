@@ -3,17 +3,19 @@ import React from "react";
 import { useController } from "react-hook-form";
 import "./Select.scss";
 
-const Select = ({ options, name, control, defaultValue }) => {
+const Select = ({ options, name, control, defaultValue, ...props }) => {
   const { field } = useController({
     control,
     name,
-    defaultValue: "" || defaultValue,
   });
   return (
-    <select {...field} className="select">
-      {options.map((value) => (
-        <option key={value} value={value}>
-          {value}
+    <select {...field} {...props} className="select">
+      <option value={defaultValue} hidden>
+        {defaultValue}
+      </option>
+      {options.map((items) => (
+        <option key={items.value} value={items.value}>
+          {items.name}
         </option>
       ))}
     </select>

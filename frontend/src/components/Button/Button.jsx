@@ -9,16 +9,12 @@ const STYLE = [
   "btn--close-addProduct",
   "btn--add-addProduct",
 ];
-const SIZES = ["btn--addProduct", "btn--medium", "btn--small"];
 
-const Button = ({ type = "button", children, buttonSize, buttonStyle }) => {
+const Button = ({ type = "button", children, buttonStyle, ...props }) => {
   const checkButtonStyle = STYLE.includes(buttonStyle) ? buttonStyle : STYLE[0];
-  const checkButtonSize = SIZES.includes(buttonSize) ? buttonSize : SIZES[0];
+
   return (
-    <button
-      type={type}
-      className={`btn ${checkButtonStyle} ${checkButtonSize}`}
-    >
+    <button type={type} {...props} className={`btn ${checkButtonStyle} `}>
       {children}
     </button>
   );

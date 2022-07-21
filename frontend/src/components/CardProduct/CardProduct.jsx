@@ -9,7 +9,11 @@ const CardProduct = ({ image, title }) => {
   return (
     <Card sx={{ maxWidth: 259 }} className="card-body">
       <CardContent className="card-body__items">
-        <img className="card-body__image" src={image} alt="" />
+        <img
+          className="card-body__image"
+          src={`http://localhost:5000/v1/${image}`}
+          alt=""
+        />
         <h2 className="card-body__name">{title}</h2>
         <div className="card-body__action">
           <Button type="button" buttonStyle="btn--success-outline">

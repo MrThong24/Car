@@ -1,4 +1,5 @@
 const { Product } = require('../models');
+// const ApiError = require('../utils/ApiError');
 /**
  * Get user by id
  * @param {ObjectId} id
@@ -30,7 +31,13 @@ const getProducts = async (query) => {
   return { products, count };
 };
 
+const createProduct = async (body, file) => {
+  const objectValue = { ...body, image: file };
+  const product = await Product.create(objectValue);
+  return product;
+};
+
 module.exports = {
-  /*   createProduct, */
   getProducts,
+  createProduct,
 };

@@ -20,7 +20,6 @@ const Sidebar = () => {
   }, [location.search]);
 
   const handleClickCategory = (id) => {
-    // eslint-disable-next-line no-underscore-dangle
     const result = category.filter((item) => item._id === id);
     setCategoryType(result[0]?.brands);
     const newFilters = { ...queryParams, page: 1, category: id };
@@ -45,10 +44,10 @@ const Sidebar = () => {
       const categories = await apiCategory.getAllCategory();
       setCategory(categories);
     } catch (error) {
-      error();
+      console.log(error);
     }
   }, [history]);
-  /*   console.log(category); */
+
   return (
     <div className="sidebar">
       <Dropdown

@@ -3,6 +3,7 @@
   justify-content: center;
   align-items: center;
   font-family: "Inter";
+  cursor: pointer;
   &--success-outline {
     background-color: #6ecb63;
     color: #ffffff;
@@ -13,11 +14,10 @@
   }
   &--close-addProduct {
     background-color: #ffffff;
+    color: var(--colorButtonPrimary);
   }
   &--add-addProduct {
     background-color: var(--colorButtonPrimary);
-  }
-  &--btn-addProduct {
-    padding: 10px 20px;
+    color: #ffff;
   }
 }

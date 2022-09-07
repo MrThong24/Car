@@ -206,7 +206,6 @@ const AddProduct = ({ onClickClose, onSubmit }) => {
           <Input
             className="productContent-form__addFile"
             name="image"
-            id="image"
             type="file"
             onChange={(e) => {
               handleClickImage(e);

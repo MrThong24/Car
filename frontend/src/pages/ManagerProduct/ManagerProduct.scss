@@ -1,11 +1,15 @@
+@import "../../styles/breakpoints";
 .content {
-  margin-top: 38px;
   max-width: 981px;
   display: flex;
   flex-direction: column;
   margin: auto;
   margin-top: 38px;
-
+  @include xl {
+    background-color: red;
+    margin-left: 20px;
+    margin-right: 20px;
+  }
   &-header {
     width: 100%;
     display: flex;
